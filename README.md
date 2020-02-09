@@ -1,5 +1,5 @@
 ### Description
-This project aims to exploring both the STM32F446RE Microcontroller and the ARM Cortex-M4 architecture in a "low level" perspective.
+This project aims to exploring both the STM32F446RE Microcontroller and the ARM Cortex-M4 architecture in a "low-level" perspective.
 
 Reference:  [eedesignlab.com](https://eedesignlab.com/exploring-the-stm32f446-mcu-introduction/)
 
@@ -47,8 +47,8 @@ Reference:  [eedesignlab.com](https://eedesignlab.com/exploring-the-stm32f446-mc
 ### Build
  
  Inside the *target-stm32f446* folder:
- - Execute 'make help' for show all available targets.
- - Execute 'make' for build the project in debug mode.
- - Execute 'make REL=0' for build the project in release mode.
+ - Execute `make help` for show all available targets.
+ - Execute `make` for build the project in debug mode.
+ - Execute `make REL=0` for build the project in release mode.
 
 ### Flash
