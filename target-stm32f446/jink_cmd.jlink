@@ -1,0 +1,4 @@
+h
+loadbin Debug/exploring_stm32f446re.bin,0x08000000
+g
+qc
