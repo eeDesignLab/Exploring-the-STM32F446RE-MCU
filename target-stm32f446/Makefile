@@ -136,11 +136,37 @@ help:
 	@echo make REL=0       - Build the project in release configuration.
 	@echo make memdump     - Display insformation about the .elf objet file.
 	@echo make readelf     - Display complete insformation about the .elf objet file.
-	@echo make clear       - Clean the output files generated in debug configuration.
-	@echo make clear REL=0 - Clean the output files generated in release configuration.
+	@echo make clean       - Clean the output files generated both for DEBUG and RELEASE configurations.
 	@echo make help        - Show the targets list.
+	@echo make flash       - Flash the executable image into the target hardware.
+	@echo make flash_erase - Erase the target hardware FLASH memory.
 
 .PHONY: clean
 clean:
 	-rm -fR Debug
 	-rm -fR Release
+
+
+#
+# FLASHING TARGET HARDWARE
+#
+
+ifeq ($(BASE_FLASH),)
+BASE_FLASH = 0x08000000
+endif
+
+JLINK_FILE = jink_cmd.jlink
+JLINK_EXE  = JLinkExe  -device STM32F446RE -If SWD -Speed 4000 -CommandFile $(JLINK_FILE)
+LOAD_BIN   = loadbin $(BUILD_DIR)/$(TARGET).bin,$(BASE_FLASH)
+
+flash:
+	echo 'h'          > $(JLINK_FILE)
+	echo $(LOAD_BIN) >> $(JLINK_FILE)
+	echo 'g'         >> $(JLINK_FILE)
+	echo 'qc'        >> $(JLINK_FILE)
+	$(JLINK_EXE)
+
+flash_erase:
+	echo 'erase' > $(JLINK_FILE)
+	echo 'qc'   >> $(JLINK_FILE)
+	$(JLINK_EXE)
